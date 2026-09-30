@@ -7,7 +7,7 @@ import i18n from "../i18n";
 export const MOCK_MODE = false;
 
 const axiosInstance = axios.create({
-  baseURL: "https://bis-backend-production-0232.up.railway.app/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
   timeout: 30000,
 });
 
