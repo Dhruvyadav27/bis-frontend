@@ -7,8 +7,8 @@ import i18n from "../i18n";
 export const MOCK_MODE = false;
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "/api",
-  timeout: 30000, // Gemini retries + Hindi generation can exceed 15s
+  baseURL: "https://bis-backend-production-0232.up.railway.app/api",
+  timeout: 30000,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -23,7 +23,8 @@ axiosInstance.interceptors.request.use((config) => {
   // Tells the backend which language the person is using right now, so any
   // Gemini-generated explanation can be produced in that language. The backend
   // needs to read this header and pass it into its LLM prompts — see chat notes.
-  config.headers["Accept-Language"] = i18n.resolvedLanguage || i18n.language || "en";
+  config.headers["Accept-Language"] =
+    i18n.resolvedLanguage || i18n.language || "en";
   return config;
 });
 
